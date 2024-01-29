@@ -3,11 +3,10 @@ const Logo = () => {
     <svg
       viewBox="0 0 111 30"
       data-uia="netflix-logo"
-      class="svg-icon svg-icon-netflix-logo"
+      className="svg-icon svg-icon-netflix-logo "
       aria-hidden="true"
       focusable="false"
       fill="#E50914"
-      className="w-[167px] h-[45px] ml-[46px]"
     >
       <g id="netflix-logo">
         <path

@@ -1,12 +1,77 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Header from "./Header";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { validate } from "../utils/validate";
+import { auth } from "../utils/firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser } from "../utils/userSlice";
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
 
+  const email = useRef(null);
+  const password = useRef(null);
+  const name = useRef(null);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const toggleSignIn = () => {
     setIsSignIn((prev) => !prev);
+  };
+
+  const handleSubmit = () => {
+    if (!isSignIn) {
+      const message = validate(
+        isSignIn,
+        email.current.value,
+        password.current.value,
+        name.current.value
+      );
+      setErrorMessage(message);
+      if (message) return;
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL: null,
+          });
+
+          const { uid, displayName, email } = auth.currentUser;
+          dispatch(addUser({ uid: uid, userName: displayName, email: email }));
+          navigate("browse");
+        })
+        .catch((error) => setErrorMessage(`${error.code} : ${error.message}`));
+    } else {
+      //sign in logic
+      const message = validate(
+        isSignIn,
+        email.current.value,
+        password.current.value
+      );
+      setErrorMessage(message);
+      if (message) return;
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          navigate("browse");
+        })
+        .catch((err) => {
+          console.error(`${err.code} : ${err.message}`);
+        });
+    }
   };
 
   return (
@@ -24,36 +89,50 @@ const Login = () => {
         id="formWrapper"
         className="absolute z-10 top-0 flex justify-center items-center w-full h-full"
       >
-        <form className="px-[68px] pt-[60px] pb-[48px] bg-[rgba(0,0,0,.75)] backdrop-blur-sm flex flex-col gap-3 rounded-md opacity-95">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
+          className="px-[68px] pt-[60px] pb-[48px] bg-[rgba(0,0,0,.75)] backdrop-blur-sm flex flex-col gap-4 rounded-md opacity-95"
+        >
           <h2 className="text-3xl font-bold text-white">
             {isSignIn ? "Sign In" : "SignUp"}
           </h2>
           {!isSignIn && (
             <div>
               <input
+                ref={name}
                 type="text"
                 name="Name"
-                id="email"
+                id="name"
                 placeholder="Name"
-                className="pt-4 px-5 rounded"
+                className="p-4 w-full rounded"
               />
             </div>
           )}
           <input
+            ref={email}
             type="text"
             name="Email"
             id="email"
             placeholder="Email or phone Number"
-            className="pt-4 px-5 rounded"
+            className="p-4 w-full rounded"
           />
           <input
-            type="text"
+            ref={password}
+            type="password"
             name="Password"
             id="password"
             placeholder="password"
-            className="pt-4 px-5 rounded"
+            className="p-4 w-full rounded"
           />
-          <button type="submit" className="bg-[#E50914] p-4 rounded">
+          <p className="text-red-700 font-bold text-lg">{errorMessage}</p>
+          <button
+            type="submit"
+            className="bg-[#E50914] p-4 rounded"
+            onClick={handleSubmit}
+          >
             {isSignIn ? "Sign In" : "SignUp"}
           </button>
           <div>
@@ -63,14 +142,17 @@ const Login = () => {
               id="rememberMe"
               className="p-2"
             />
-            <label htmlFor="rememberMe">Remember Me</label>
+            <label htmlFor="rememberMe" className="text-[#B3B3B3] text-[13px]">
+              Remember Me
+            </label>
           </div>
 
           <p>
-            <span className="text-[#737373]">New to Netflix? &nbsp;</span>
+            <span className="text-[#737373]">
+              {isSignIn ? "New to Netflix" : "Already a user ?"}{" "}
+            </span>
             <Link className="text-[#FFFFFF]" onClick={toggleSignIn}>
-              {" "}
-              Sign up Now
+              {isSignIn ? "Sign up Now " : "Sign in"}
             </Link>
           </p>
         </form>

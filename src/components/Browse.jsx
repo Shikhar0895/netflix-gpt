@@ -2,16 +2,12 @@ import React from "react";
 
 import HomeNav from "./HomeNav";
 import HomePageBody from "./HomePageBody";
-import { useSelector } from "react-redux";
-
-/*
-
-*/
+import Header from "./Header";
 
 const Browse = () => {
   return (
     <>
-      <HomeNav />
+      <Header />
       <HomePageBody />
     </>
   );

@@ -21,15 +21,13 @@ const HomeNav = () => {
   };
 
   const navigate = useNavigate();
-  const selector = useSelector((state) => state.signedInUser);
-  console.log(selector);
+  const dispatch = useDispatch();
+
   const handleAccClick = () => {
     signOut(auth)
-      .then(() => {
-        navigate("/");
-      })
+      .then(() => {})
       .catch((err) => {
-        console.error(err.message);
+        console.error(`error code : ${err.code} , message : ${err.message}`);
       });
   };
   return (

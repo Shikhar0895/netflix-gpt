@@ -8,8 +8,9 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -45,10 +46,7 @@ const Login = () => {
             displayName: name.current.value,
             photoURL: null,
           });
-
-          const { uid, displayName, email } = auth.currentUser;
-          dispatch(addUser({ uid: uid, userName: displayName, email: email }));
-          navigate("browse");
+          console.log(auth.currentUser);
         })
         .catch((error) => setErrorMessage(`${error.code} : ${error.message}`));
     } else {
@@ -65,9 +63,7 @@ const Login = () => {
         email.current.value,
         password.current.value
       )
-        .then((userCredential) => {
-          navigate("browse");
-        })
+        .then((userCredential) => {})
         .catch((err) => {
           console.error(`${err.code} : ${err.message}`);
         });
@@ -128,11 +124,7 @@ const Login = () => {
             className="p-4 w-full rounded"
           />
           <p className="text-red-700 font-bold text-lg">{errorMessage}</p>
-          <button
-            type="submit"
-            className="bg-[#E50914] p-4 rounded"
-            onClick={handleSubmit}
-          >
+          <button type="submit" className="bg-[#E50914] p-4 rounded">
             {isSignIn ? "Sign In" : "SignUp"}
           </button>
           <div>

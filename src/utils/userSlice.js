@@ -9,17 +9,15 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     addUser: (state, action) => {
-      const user = [
-        {
-          uid: action.payload.uid,
-          userName: action.payload.userName,
-          email: action.payload.email,
-        },
-      ];
-      state.signedInUser.push(user);
+      const newUser = {
+        uid: action.payload.uid,
+        userName: action.payload.userName,
+        email: action.payload.email,
+      };
+      state.signedInUser.push(newUser);
     },
     removeUser: (state, action) => {
-      return null;
+      state.signedInUser = [];
     },
   },
 });

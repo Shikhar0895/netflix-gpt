@@ -1,12 +1,19 @@
 import React from "react";
-import Logo from "../assets/logo";
-import { Link, useNavigate } from "react-router-dom";
-import { SearchIcon, accountLogo } from "../assets/index";
-import { useDispatch, useSelector } from "react-redux";
-import { removeUser } from "../utils/userSlice";
+import { Link } from "react-router-dom";
+
+import {
+  SearchIcon,
+  accountLogo,
+  IoChevronDownCircleSharp,
+  NetflixLogo,
+} from "../assets/index";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 const HomeNav = () => {
+  const handleSearch = () => {
+    return null;
+  };
+
   const headerNavLinks = [
     "Home",
     "TV Shows",
@@ -16,13 +23,6 @@ const HomeNav = () => {
     "Browse by Languages",
   ];
 
-  const handleSearch = () => {
-    return null;
-  };
-
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
   const handleAccClick = () => {
     signOut(auth)
       .then(() => {})
@@ -30,6 +30,7 @@ const HomeNav = () => {
         console.error(`error code : ${err.code} , message : ${err.message}`);
       });
   };
+
   return (
     <>
       <nav
@@ -39,7 +40,7 @@ const HomeNav = () => {
         <div className="flex flex-row " id="leftSection">
           <Link to="/browse">
             <span className="w-[92px] h-[68px] flex justify-center items-center ">
-              <Logo />
+              <NetflixLogo />
             </span>
           </Link>
           <ul className="flex justify-center items-center gap">
@@ -57,9 +58,11 @@ const HomeNav = () => {
           <button onClick={handleSearch}>
             <SearchIcon />
           </button>
-          <button onClick={handleAccClick}>
+          <button onClick={handleAccClick} className="flex items-center gap-2">
             <img src={accountLogo} alt="accountLogo" className="rounded-md" />
-            <span>Hi</span>
+            <span>
+              <IoChevronDownCircleSharp />
+            </span>
           </button>
         </div>
       </nav>

@@ -12,10 +12,6 @@ const useGetMovieImage = () => {
   const id = useSelector((state) => state.movies?.nowPlaying[0][0].id);
   const getMovieImage = async () => {
     try {
-      //   const assets = useSelector((state) => state.movies.assets);
-      //   const id = useSelector((state) => state.movies.nowPlaying[0][0].id);
-      //   console.log(id);
-
       const image = await fetch(
         `https://api.themoviedb.org/3/movie/${id}/images?api_key=${API_KEY}`
       );

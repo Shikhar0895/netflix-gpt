@@ -59,6 +59,3 @@ export default userSlice.reducer;
 ```
 
 #
-
-- API key : b18eaf98576c53ecbf95a2282a42309e
-- API Read Access token : eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiMThlYWY5ODU3NmM1M2VjYmY5NWEyMjgyYTQyMzA5ZSIsInN1YiI6IjY1YmEwNjEyNzM5MGMwMDE0OGNmYjFmNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.TeEP-\_O5RnEDWeljtPzgUTp7uGPMrwnB6LUh4N5C6oQ

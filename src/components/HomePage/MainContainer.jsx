@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import MovieInfo from "./MovieInfo";
 import useGetMovieImage from "../../hooks/useGetMovieImage";
 import Backdrop from "./Backdrop";
+import VideoBg from "./VideoBg";
 
 const MainContainer = () => {
   const movies = useSelector((state) => state.movies?.nowPlaying);
@@ -15,6 +16,7 @@ const MainContainer = () => {
     <div className="bg-[#141414] h-[2000px]" id="MainContWrapper">
       <MovieInfo title={original_title} info={overview} id={id} />
       <Backdrop id={id} />
+      {/* <VideoBg /> */}
     </div>
   );
 };

@@ -7,7 +7,7 @@ const MovieInfo = ({ title, info, id }) => {
   const logoUrl = useSelector((state) => state.movies?.assets[1].logos[0]);
 
   return (
-    <div className="h-auto box-content w-[300px] ml-10 flex flex-col gap-5 absolute z-20 top-[300px] backdrop-blur-sm p-7 rounded-sm">
+    <div className="h-auto box-content w-[300px] ml-10 flex flex-col gap-5 absolute z-20 top-[240px]">
       <img src={logoUrl} alt="logo" />
       <h4 className="text-white">{info}</h4>
       <div className="flex gap-3 py-3">
@@ -23,3 +23,89 @@ const MovieInfo = ({ title, info, id }) => {
 };
 
 export default MovieInfo;
+
+{
+  /*
+{
+  "genres": [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    },
+    {
+      "id": 16,
+      "name": "Animation"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 80,
+      "name": "Crime"
+    },
+    {
+      "id": 99,
+      "name": "Documentary"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 10751,
+      "name": "Family"
+    },
+    {
+      "id": 14,
+      "name": "Fantasy"
+    },
+    {
+      "id": 36,
+      "name": "History"
+    },
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 10402,
+      "name": "Music"
+    },
+    {
+      "id": 9648,
+      "name": "Mystery"
+    },
+    {
+      "id": 10749,
+      "name": "Romance"
+    },
+    {
+      "id": 878,
+      "name": "Science Fiction"
+    },
+    {
+      "id": 10770,
+      "name": "TV Movie"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 10752,
+      "name": "War"
+    },
+    {
+      "id": 37,
+      "name": "Western"
+    }
+  ]
+}
+
+*/
+}

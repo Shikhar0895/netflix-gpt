@@ -28,7 +28,7 @@ const VideoBg = ({ id }) => {
   }, []);
   return (
     <div
-      className="absolute z-10 top-0 left-0 w-full h-[1000px] bg-blue-500 "
+      className="absolute z-10 top-0 left-0 w-full h-[1000px] aspect-video bg-blue-500 "
       id="trailer"
     >
       <iframe
@@ -40,7 +40,6 @@ const VideoBg = ({ id }) => {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
         allowFullScreen={false}
       ></iframe>
-      {/* <YouTube videoId="YPHn4xSvjNM" opts={{ height: "390", width: "640" }} /> */}
     </div>
   );
 };

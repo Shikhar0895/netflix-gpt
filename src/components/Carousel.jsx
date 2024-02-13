@@ -2,37 +2,31 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const Carousel = ({ movieList, headerTitle }) => {
-  const [movies, setMovies] = useState(null);
-  const data = useSelector((state) => state.movies?.nowPlaying);
-
-  useEffect(() => {
-    if (data.length == 0) return;
-
-    setMovies(data);
-  }, [data]);
-
   return (
-    <div className="px-[60px]">
+    <div className="px-[60px]  ">
       <h2 className="text-white text-base">{headerTitle}</h2>
       <div
-        className="flex justify-between gap-3 overflow-x-clip "
+        className="flex gap-3 overflow-x-scroll h-[160px]"
         id="carouselWrapper"
       >
-        {movieList.map((card) => (
-          <Card
-            image={`https://image.tmdb.org/t/p/original${card.backdrop_path}`}
-            key={card.id}
-          />
-        ))}
+        <div className="flex">
+          {movieList.map((card) => (
+            <Card
+              image={`https://image.tmdb.org/t/p/original${card.backdrop_path}`}
+              key={card.id}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
 };
 
 const Card = ({ image }) => {
+  // w-[230px] h-[129px]
   return (
     <a>
-      <div className="w-[230px] h-[129px] bg-emerald-500">
+      <div className="w-[230px] h-[129px] pr-1">
         <img src={image} alt="movieImg" />
       </div>
     </a>
